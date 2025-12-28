@@ -21,10 +21,10 @@
 }
 
 .studentButton {
-    padding: 12px 25px;
+    padding: 1%;
     font-size: 18px;
-    border-radius: 8px;
-    border: none;
+    border-radius: 20px;
+    border: solid 1px black;
     background-color: #6da8ff;
 }
 

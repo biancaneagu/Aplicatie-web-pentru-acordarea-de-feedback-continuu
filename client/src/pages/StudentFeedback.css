@@ -1,0 +1,29 @@
+.feedbackContainer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background-image: url("../assets/fundal.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+}
+
+.emoticoane {
+    display: flex;
+    gap: 40px;
+    font-size: 70px;
+}
+
+.emoticoane span {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.emoticoane span:hover {
+    transform: scale(1.2);
+}
