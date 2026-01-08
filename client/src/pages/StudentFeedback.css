@@ -14,9 +14,10 @@
 }
 
 .emoticoane {
-    display: flex;
-    gap: 40px;
-    font-size: 70px;
+  font-size: 50px;
+  display: flex;
+  gap: 30px;
+  cursor: pointer;
 }
 
 .emoticoane span {
@@ -26,4 +27,9 @@
 
 .emoticoane span:hover {
     transform: scale(1.2);
+}
+
+.emoticoane.disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
