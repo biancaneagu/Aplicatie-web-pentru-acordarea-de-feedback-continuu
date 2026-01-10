@@ -1,41 +1,96 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useState } from "react";
 import "./StudentFeedback.css";
 
 export default function StudentFeedback() {
   const { activityId } = useParams();
-  const [sent, setSent] = useState(false);
+  const location = useLocation();
+  const activity = location.state?.activity;
+
+  const [statusMsg, setStatusMsg] = useState("");
+  const [sending, setSending] = useState(false);
 
   const sendFeedback = async (type) => {
-    if (sent) return;
+    if (sending) return;
 
-    await fetch(
-      `http://localhost:4000/api/activities/${activityId}/feedback`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ type }),
+    setSending(true);
+    setStatusMsg("");
+
+    try {
+      const resp = await fetch(
+        `http://localhost:4000/api/activities/${activityId}/feedback`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type }),
+        }
+      );
+
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        setStatusMsg(data?.message || "Nu am putut trimite feedback.");
+        return;
       }
-    );
 
-    setSent(true);
+      setStatusMsg("Feedback trimis. Mulțumim! Poți trimite din nou oricând.");
+    } catch (err) {
+      console.error(err);
+      setStatusMsg("Eroare de rețea. Verifică dacă serverul rulează.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
     <div className="feedbackContainer">
-      <h1>Trimite Feedback</h1>
-      <p>Alege emoticonul care reprezinta feedbackul tau:</p>
+      <h1>Trimite feedback</h1>
 
-      <div className={`emoticoane ${sent ? "disabled" : ""}`}>
-        <span onClick={() => sendFeedback("happy")}>😊</span>
-        <span onClick={() => sendFeedback("sad")}>😞</span>
-        <span onClick={() => sendFeedback("surprised")}>😮</span>
-        <span onClick={() => sendFeedback("confused")}>😕</span>
-      </div>
+      {activity?.title ? (
+        <p>
+          Activitate: <b>{activity.title}</b>
+        </p>
+      ) : (
+        <p>Activitate ID: <b>{activityId}</b></p>
+      )}
 
-      {sent && <p>Feedback trimis. Multumim!</p>}
+      <p>Alege emoticonul care reprezintă feedback-ul tău:</p>
+
+     <div className={`feedbackGrid ${sending ? "disabled" : ""}`}>
+  <button
+    className="feedbackOption"
+    onClick={() => sendFeedback("SMILE")}
+  >
+    <span className="feedbackEmoji">😊</span>
+    <span className="feedbackLabel">Smiley</span>
+  </button>
+
+  <button
+    className="feedbackOption"
+    onClick={() => sendFeedback("FROWN")}
+  >
+    <span className="feedbackEmoji">😞</span>
+    <span className="feedbackLabel">Frowny</span>
+  </button>
+
+  <button
+    className="feedbackOption"
+    onClick={() => sendFeedback("SURPRISED")}
+  >
+    <span className="feedbackEmoji">😮</span>
+    <span className="feedbackLabel">Surprised</span>
+  </button>
+
+  <button
+    className="feedbackOption"
+    onClick={() => sendFeedback("CONFUSED")}
+  >
+    <span className="feedbackEmoji">😕</span>
+    <span className="feedbackLabel">Confused</span>
+  </button>
+</div>
+
+      {statusMsg && <p style={{ marginTop: 12 }}>{statusMsg}</p>}
     </div>
   );
 }

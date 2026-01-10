@@ -13,23 +13,50 @@
     overflow: hidden;
 }
 
-.emoticoane {
-  font-size: 50px;
-  display: flex;
-  gap: 30px;
+.feedbackGrid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.feedbackOption {
+  height: 180px;
+  border-radius: 16px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.65);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  transition: transform 120ms ease, background 120ms ease;
 }
 
-.emoticoane span {
-    cursor: pointer;
-    transition: transform 0.2s;
+.feedbackOption:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.85);
 }
 
-.emoticoane span:hover {
-    transform: scale(1.2);
+.feedbackEmoji {
+  font-size: 56px;
+  line-height: 1;
 }
 
-.emoticoane.disabled {
-  opacity: 0.4;
+.feedbackLabel {
+  margin-top: 8px;
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+.feedbackGrid.disabled {
+  opacity: 0.6;
   pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .feedbackOption {
+    height: 150px;
+  }
 }

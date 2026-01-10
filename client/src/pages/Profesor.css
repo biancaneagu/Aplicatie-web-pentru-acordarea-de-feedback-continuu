@@ -1,0 +1,155 @@
+body{
+     background-image: url("../assets/fundal.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    overflow: hidden;
+}
+
+.profesorPage {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.profesorPage h1 {
+  margin: 0 0 6px;
+}
+
+.profesorPage p {
+  margin: 0 0 14px;
+  opacity: 0.85;
+}
+
+.profMessage {
+  margin: 12px 0 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.profGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .profGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  border-radius: 14px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(6px);
+}
+
+.card h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.card.wide {
+  grid-column: 1 / -1;
+}
+
+.form {
+  display: grid;
+  gap: 10px;
+}
+
+.form input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  outline: none;
+  background: white;
+}
+
+.form input:focus {
+  border-color: rgba(0, 0, 0, 0.35);
+}
+
+.form label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.form button {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+}
+
+.form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.card select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: white;
+  outline: none;
+}
+
+.activityInfo {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.activityInfo p {
+  margin: 6px 0;
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.card li {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  white-space: nowrap;
+}
+
+.table th {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.table tr:hover td {
+  background: rgba(0, 0, 0, 0.03);
+}
