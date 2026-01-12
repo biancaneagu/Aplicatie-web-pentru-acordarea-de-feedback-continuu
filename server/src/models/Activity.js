@@ -1,29 +1,28 @@
-const {DataTypes}= require('sequelize');
+import { DataTypes } from 'sequelize';
+import sequelize from '../db.js'; // Atenție: în ESM, extensia .js este adesea obligatorie
 
-const sequelize=require('../db');
-
-const Activity=sequelize.define("Activity",{
-    title:{
-        type:DataTypes.STRING,
-        allowNull:false
+const Activity = sequelize.define("Activity", {
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    description:{
-        type:DataTypes.STRING,
-        allowNull:false
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    code:{
-        type:DataTypes.STRING,
-        allowNull:false,
-        unique:true
+    code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     },
-    startTime:{
-        type:DataTypes.DATE,
-        allowNull:false
+    startTime: {
+        type: DataTypes.DATE,
+        allowNull: false
     },
-    endTime:{
-        type:DataTypes.DATE,
-        allowNull:false
+    endTime: {
+        type: DataTypes.DATE,
+        allowNull: false
     }
 });
 
-module.exports=Activity;
+export default Activity;
