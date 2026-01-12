@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Profesor.css";
 
-const API = "http://localhost:4000/api";
+const API = "https://aplicatie-web-pentru-acordarea-de-goka.onrender.com/api";
 
 function formatDateTime(value) {
   if (!value) return "-";
