@@ -10,25 +10,19 @@ app.use(express.json());
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://aplicatie-web-pentru-acordarea-de-f.vercel.app", 
+  "https://aplicatie-web-pentru-acordarea-de-f.vercel.app"
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-  
+  origin: (origin, callback) => {
     if (!origin) return callback(null, true);
-
     if (allowedOrigins.includes(origin)) return callback(null, true);
-
-    return callback(new Error("Not allowed by CORS: " + origin));
+    callback(new Error("Not allowed by CORS"));
   },
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
-app.options("*", cors());
-
+app.use(express.json());
 
 sequelize.sync().then(() => {
   console.log("Database synchronized");
