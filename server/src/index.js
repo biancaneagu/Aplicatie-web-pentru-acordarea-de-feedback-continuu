@@ -7,7 +7,22 @@ const sequelize = require("./db");
 const { Activity, Feedback } = require("./models");
 
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173" }));
+import cors from "cors";
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://aplicatie-web-pentru-acordarea-de-f.vercel.app", 
+];
+
+app.use(cors({
+  origin: function (origin, cb) {
+    if (!origin) return cb(null, true);
+    if (allowedOrigins.includes(origin)) return cb(null, true);
+    return cb(new Error("Not allowed by CORS: " + origin));
+  },
+  credentials: true
+}));
+
 
 sequelize.sync().then(() => {
   console.log("Database synchronized");
