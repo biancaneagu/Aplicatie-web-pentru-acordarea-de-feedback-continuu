@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db.js'; 
+import sequelize from '../db.js';
 const Activity = sequelize.define("Activity", {
     title: {
         type: DataTypes.STRING,
