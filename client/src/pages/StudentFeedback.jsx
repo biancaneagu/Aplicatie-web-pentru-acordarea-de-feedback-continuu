@@ -3,13 +3,16 @@ import { useState } from "react";
 import "./StudentFeedback.css";
 
 export default function StudentFeedback() {
+  // id-ul activitatii luat din URL 
   const { activityId } = useParams();
   const location = useLocation();
   const activity = location.state?.activity;
 
+  // stare pentru mesaj si trimitere feedback
   const [statusMsg, setStatusMsg] = useState("");
   const [sending, setSending] = useState(false);
 
+  // trimite feedback-ul ales catre backend
   const sendFeedback = async (type) => {
     if (sending) return;
 
@@ -56,39 +59,39 @@ export default function StudentFeedback() {
 
       <p>Alege emoticonul care reprezintă feedback-ul tău:</p>
 
-     <div className={`feedbackGrid ${sending ? "disabled" : ""}`}>
-  <button
-    className="feedbackOption"
-    onClick={() => sendFeedback("SMILE")}
-  >
-    <span className="feedbackEmoji">😊</span>
-    <span className="feedbackLabel">Smiley</span>
-  </button>
+      <div className={`feedbackGrid ${sending ? "disabled" : ""}`}>
+        <button
+          className="feedbackOption"
+          onClick={() => sendFeedback("SMILE")}
+        >
+          <span className="feedbackEmoji">😊</span>
+          <span className="feedbackLabel">Smiley</span>
+        </button>
 
-  <button
-    className="feedbackOption"
-    onClick={() => sendFeedback("FROWN")}
-  >
-    <span className="feedbackEmoji">😞</span>
-    <span className="feedbackLabel">Frowny</span>
-  </button>
+        <button
+          className="feedbackOption"
+          onClick={() => sendFeedback("FROWN")}
+        >
+          <span className="feedbackEmoji">😞</span>
+          <span className="feedbackLabel">Frowny</span>
+        </button>
 
-  <button
-    className="feedbackOption"
-    onClick={() => sendFeedback("SURPRISED")}
-  >
-    <span className="feedbackEmoji">😮</span>
-    <span className="feedbackLabel">Surprised</span>
-  </button>
+        <button
+          className="feedbackOption"
+          onClick={() => sendFeedback("SURPRISED")}
+        >
+          <span className="feedbackEmoji">😮</span>
+          <span className="feedbackLabel">Surprised</span>
+        </button>
 
-  <button
-    className="feedbackOption"
-    onClick={() => sendFeedback("CONFUSED")}
-  >
-    <span className="feedbackEmoji">😕</span>
-    <span className="feedbackLabel">Confused</span>
-  </button>
-</div>
+        <button
+          className="feedbackOption"
+          onClick={() => sendFeedback("CONFUSED")}
+        >
+          <span className="feedbackEmoji">😕</span>
+          <span className="feedbackLabel">Confused</span>
+        </button>
+      </div>
 
       {statusMsg && <p style={{ marginTop: 12 }}>{statusMsg}</p>}
     </div>

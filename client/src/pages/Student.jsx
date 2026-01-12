@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Student.css";
 
+//studentul  introduce codul pt a da join unei activitati
 export default function Student() {
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
+  // functie care incearca sa dea join activitatii pe baza codului
   const handleJoin = async () => {
     setErrorMsg("");
 
@@ -18,6 +20,7 @@ export default function Student() {
 
     setLoading(true);
     try {
+      // trimitem codul la backend ca sa verificam daca exista activitatea
       const resp = await fetch("http://localhost:4000/api/activities/join", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -55,3 +55,26 @@ button:hover{
     background-color: rgba(79, 79, 202, 0.171);
     cursor: pointer;
 }
+
+@media (max-width: 600px) {
+  .home-title {
+    font-size: 30px;
+    padding-top: 16px;
+  }
+
+  .home-text {
+    font-size: 18px;
+  }
+
+  .home-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 360px;
+  }
+}

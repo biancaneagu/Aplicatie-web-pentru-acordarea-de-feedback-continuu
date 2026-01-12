@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Profesor.css";
 
+// URL-ul pentru API luat dintr-o variabila de mediu
 const API = `${import.meta.env.VITE_API_URL}/api`;
 
-
+//functie pentru formatarea datei si orei
 function formatDateTime(value) {
   if (!value) return "-";
   const d = new Date(value);
@@ -26,30 +27,36 @@ function emojiForType(type) {
 }
 
 export default function Profesor() {
+  // State-uri pentru formularul de creare activitate
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
+  // State-uri pentru datele primite de la server
   const [activities, setActivities] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [timeline, setTimeline] = useState([]);
   const [summary, setSummary] = useState(null);
 
+  // State-uri pentru monitorizare status si erori
   const [lastUpdate, setLastUpdate] = useState(null);
   const [externalError, setExternalError] = useState("");
   const [loadingExternal, setLoadingExternal] = useState(false);
 
+  // State-uri pentru feedback vizual (loading, mesaje succes/eroare)
   const [message, setMessage] = useState("");
   const [loadingActivities, setLoadingActivities] = useState(false);
   const [loadingFeedback, setLoadingFeedback] = useState(false);
   const [creating, setCreating] = useState(false);
 
+  // Folosim useMemo ca sa nu cautam prin array la fiecare render
   const selectedActivity = useMemo(
     () => activities.find((a) => String(a.id) === String(selectedId)),
     [activities, selectedId]
   );
 
+  // Incarca lista de activitati din backend
   async function loadActivities() {
     setLoadingActivities(true);
     setMessage("");
@@ -68,6 +75,7 @@ export default function Profesor() {
     }
   }
 
+  // Functie care ia tot feedback-ul pentru o activitate specifica si calculeaza sumarul
   async function loadFeedback(activityId) {
     if (!activityId) return;
     setLoadingFeedback(true);
@@ -90,6 +98,7 @@ export default function Profesor() {
     }
   }
 
+  // Verifica statusul serviciului extern
   async function loadExternalStatus() {
     setExternalError("");
     setLoadingExternal(true);
@@ -108,15 +117,18 @@ export default function Profesor() {
     }
   }
 
+  // La montarea componentei incarcam activitatile si statusul aplicatiei
   useEffect(() => {
     loadActivities();
     loadExternalStatus();
   }, []);
 
+  // Cand se schimba activitatea selectata, reincarcam feedback-ul
   useEffect(() => {
     if (selectedId) loadFeedback(selectedId);
   }, [selectedId]);
 
+  // Creeaza o activitate noua
   async function handleCreateActivity(e) {
     e.preventDefault();
     setMessage("");
@@ -137,6 +149,7 @@ export default function Profesor() {
       const data = await resp.json();
       if (!resp.ok) throw new Error(data?.message || "Eroare la creare");
 
+      // Resetam formularul si afisam mesaj de succes
       setMessage(`Activitate creată cu succes! Cod: ${data.code}`);
       setTitle("");
       setDescription("");
