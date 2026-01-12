@@ -15,13 +15,20 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, cb) {
-    if (!origin) return cb(null, true);
-    if (allowedOrigins.includes(origin)) return cb(null, true);
-    return cb(new Error("Not allowed by CORS: " + origin));
+  origin: function (origin, callback) {
+  
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+
+    return callback(new Error("Not allowed by CORS: " + origin));
   },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
+app.options("*", cors());
 
 
 sequelize.sync().then(() => {
