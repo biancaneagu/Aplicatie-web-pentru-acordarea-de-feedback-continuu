@@ -1,6 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../db.js'; // Atenție: în ESM, extensia .js este adesea obligatorie
-
+import sequelize from '../db.js'; 
 const Activity = sequelize.define("Activity", {
     title: {
         type: DataTypes.STRING,
