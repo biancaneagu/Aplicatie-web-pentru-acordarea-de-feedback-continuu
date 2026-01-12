@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import "./Profesor.css";
 
-const API = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+const API = `${import.meta.env.VITE_API_URL}/api`;
+
 
 function formatDateTime(value) {
   if (!value) return "-";
