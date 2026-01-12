@@ -1,13 +1,12 @@
-const express = require("express");
-const cors = require("cors");
-const axios = require("axios");
+import express from "express";
+import cors from "cors";
+import axios from "axios";
+
+import sequelize from "./db.js";
+import { Activity, Feedback } from "./models/index.js";
 
 const app = express();
-const sequelize = require("./db");
-const { Activity, Feedback } = require("./models");
-
 app.use(express.json());
-import cors from "cors";
 
 const allowedOrigins = [
   "http://localhost:5173",
