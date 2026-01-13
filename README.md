@@ -74,3 +74,11 @@ npm run dev
 
 npm install
 npm start
+
+
+
+##Specificatii:
+
+Aplicatia este pe live https://aplicatie-web-pentru-acordarea-de-f.vercel.app/ 
+dar avem niste erori la comunicarea dintre frontend si backend.
+Forma perfect functionala a aplicatiei este cea de la commitul de pe 10 ianuarie
